@@ -1,0 +1,11 @@
+<resources>
+
+    <declare-styleable name="ColorMorphLayout">
+        <attr name="colorNormal" format="reference|color" />
+        <attr name="colorTouched" format="reference|color" />
+        <attr name="morphDurationMs" format="reference|integer" />
+        <attr name="borderCornerRadius" format="reference|dimension" />
+        <attr name="touchEffectsEnabled" format="reference|boolean" />
+    </declare-styleable>
+
+</resources>

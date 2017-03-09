@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="cmd__default_color_normal">#FF3498DB</color>
+    <color name="cmd__default_color_touched">#FF9B59B6</color>
+
+</resources>

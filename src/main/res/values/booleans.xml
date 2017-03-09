@@ -1,0 +1,5 @@
+<resources>
+
+    <bool name="cmd__touch_effects_enabled_by_default">true</bool>
+
+</resources>

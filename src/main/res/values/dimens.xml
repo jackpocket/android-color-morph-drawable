@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="cmd__default_corner_radius">0dip</dimen>
+
+</resources>
