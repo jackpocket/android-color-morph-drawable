@@ -1,5 +1,5 @@
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14.1'
+    gradleVersion = '2.8'
 }
 
 buildscript {
@@ -9,7 +9,7 @@ buildscript {
         }
 
         dependencies {
-            classpath 'com.android.tools.build:gradle:2.2.3'
+            classpath 'com.android.tools.build:gradle:1.3.0'
             classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
             classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
     }
