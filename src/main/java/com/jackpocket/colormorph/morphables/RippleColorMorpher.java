@@ -46,7 +46,7 @@ public class RippleColorMorpher extends Morphable {
                 : centerPosition;
 
         float radius = (Math.max(canvas.getWidth(), canvas.getHeight()) * 1.20f)
-                * interpolator.getInterpolation((System.currentTimeMillis() - animationStartedAtMs) / (float) getAnimationDurationMs());
+                * getInterpolation();
 
         canvas.drawCircle(position[0],
                 position[1],

@@ -32,6 +32,9 @@ public class ColorMorphDrawable extends Drawable {
         this.color = color;
     }
 
+    /**
+     * Override the current color and all animations that may be running with the supplied value
+     */
     public ColorMorphDrawable overrideColor(int color) {
         synchronized(morphers){
             morphers.clear();
@@ -57,15 +60,24 @@ public class ColorMorphDrawable extends Drawable {
         return this;
     }
 
+    /**
+     * Set the default Interpolator used for the default ripple animations of this drawable
+     */
     public ColorMorphDrawable setDefaultInterpolator(Interpolator morphingInterpolator) {
         this.defaultInterpolator = morphingInterpolator;
         return this;
     }
 
+    /**
+     * Morph to the provided color from the center of the view
+     */
     public ColorMorphDrawable morphRippledTo(int morphingTargetColor){
         return morphRippledTo(morphingTargetColor, null);
     }
 
+    /**
+     * Morph to the provided color from a specified center position
+     */
     public ColorMorphDrawable morphRippledTo(int morphingTargetColor, int[] centerPosition){
         Morphable morpher = new RippleColorMorpher(morphingTargetColor)
                 .setCenterPosition(centerPosition)
@@ -75,6 +87,9 @@ public class ColorMorphDrawable extends Drawable {
         return morphWith(morpher);
     }
 
+    /**
+     * Morph to the provided color using the supplied Morphable
+     */
     public ColorMorphDrawable morphWith(Morphable morpher){
         synchronized(morphers){
             this.morphers.add(morpher);

@@ -22,6 +22,7 @@ public class MorphGestureController extends GestureDetector.SimpleOnGestureListe
     private boolean touched = false;
 
     private WeakReference<View.OnClickListener> onClickDelegate = new WeakReference<View.OnClickListener>(null);
+    private WeakReference<View.OnLongClickListener> onLongClickDelegate = new WeakReference<View.OnLongClickListener>(null);
     private WeakReference<SimpleOnGestureListener> secondaryGestureDelegate = new WeakReference<SimpleOnGestureListener>(null);
 
     public MorphGestureController(Context context, MorphGestureEventListener eventListener){
@@ -67,7 +68,6 @@ public class MorphGestureController extends GestureDetector.SimpleOnGestureListe
     @Override
     public boolean onSingleTapConfirmed(MotionEvent event) {
         View.OnClickListener listener = onClickDelegate.get();
-
         if(listener != null)
             listener.onClick(targetView.get());
 
@@ -80,6 +80,10 @@ public class MorphGestureController extends GestureDetector.SimpleOnGestureListe
 
     @Override
     public void onLongPress(MotionEvent e) {
+        View.OnLongClickListener listener = onLongClickDelegate.get();
+        if(listener != null)
+            listener.onLongClick(targetView.get());
+
         SimpleOnGestureListener delegate = secondaryGestureDelegate.get();
         if(delegate != null)
             delegate.onLongPress(e);
@@ -123,6 +127,10 @@ public class MorphGestureController extends GestureDetector.SimpleOnGestureListe
 
     public void setOnClickListener(View.OnClickListener onClickListener){
         onClickDelegate = new WeakReference<View.OnClickListener>(onClickListener);
+    }
+
+    public void setOnLongClickListener(View.OnLongClickListener onLongClickListener){
+        onLongClickDelegate = new WeakReference<View.OnLongClickListener>(onLongClickListener);
     }
 
     public void setSecondaryGestureListener(GestureDetector.SimpleOnGestureListener gestureListener){

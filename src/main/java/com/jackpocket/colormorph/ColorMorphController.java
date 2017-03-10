@@ -64,6 +64,9 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
         this.morphDrawable.setCornerRadiusPx(cornerRadius);
     }
 
+    /**
+     * Actually attach the morph Drawable and gesture detectors to the View. Make sure any
+     */
     public ColorMorphController attach(View view){
         gestureDetector.attach(view);
 
@@ -75,6 +78,9 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
         return this;
     }
 
+    /**
+     * Set the normal-state color, and override current drawable if not touched
+     */
     public ColorMorphController setColorNormal(int colorNormal) {
         this.colorNormal = colorNormal;
 
@@ -84,6 +90,18 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
         return this;
     }
 
+    /**
+     * Set the normal-state color, but will not directly override current drawable
+     */
+    public ColorMorphController setColorNormalSilently(int colorNormal) {
+        this.colorNormal = colorNormal;
+
+        return this;
+    }
+
+    /**
+     * Set the touched-state color, and override current drawable if touched
+     */
     public ColorMorphController setColorTouched(int colorTouched) {
         this.colorTouched = colorTouched;
 
@@ -93,16 +111,34 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
         return this;
     }
 
+    /**
+     * Set the touched-state color, but will not directly override current drawable
+     */
+    public ColorMorphController setColorTouchedSilently(int colorTouched) {
+        this.colorTouched = colorTouched;
+
+        return this;
+    }
+
+    /**
+     * Morph to the provided color from the center of the view
+     */
     public ColorMorphController morphRippledTo(int color){
         return morphRippledTo(color, null);
     }
 
+    /**
+     * Morph to the provided color from a specified center position
+     */
     public ColorMorphController morphRippledTo(int color, int[] fromPosition){
         this.morphDrawable.morphRippledTo(color, fromPosition);
 
         return this;
     }
 
+    /**
+     * Morph to the provided color using the supplied Morphable
+     */
     public ColorMorphController morphWith(Morphable morphable){
         this.morphDrawable.morphWith(morphable);
 
@@ -125,11 +161,37 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
                 new int[]{(int) event.getX(), (int) event.getY()});
     }
 
+    /**
+     * Set a View.OnClickListener to be triggered by the GestureDetector's onSingleTapConfirmed() callback.
+     * Note: You MUST also set the listener on the View if not using the ColorMorphLayout pattern
+     */
     public void setOnClickListener(View.OnClickListener onClickListener){
         gestureDetector.setOnClickListener(onClickListener);
     }
 
+    /**
+     * Set a View.OnLongClickListener to be triggered by the GestureDetector's onLongPress() callback.
+     * Note: You MUST also set the listener on the View if not using the ColorMorphLayout pattern
+     */
+    public void setOnLongClickListener(View.OnLongClickListener onClickListener){
+        gestureDetector.setOnLongClickListener(onClickListener);
+    }
+
+    /**
+     * Set a secondary SimpleOnGestureListener to receive passive events from the attached View.
+     * All gestures are handled internally and pass off the events as they occur.
+     */
     public void setSecondaryGestureListener(SimpleOnGestureListener gestureListener){
         gestureDetector.setSecondaryGestureListener(gestureListener);
     }
+
+    public ColorMorphController setTouchEffectsEnabled(boolean touchEffectsEnabled){
+        this.touchEffectsEnabled = touchEffectsEnabled;
+        return this;
+    }
+
+    public boolean isTouched(){
+        return gestureDetector.isTouched();
+    }
+
 }

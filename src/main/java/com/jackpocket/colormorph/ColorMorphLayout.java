@@ -37,6 +37,13 @@ public class ColorMorphLayout extends FrameLayout {
         morphController.setOnClickListener(onClickListener);
     }
 
+    @Override
+    public void setOnLongClickListener(View.OnLongClickListener onLongClickListener){
+        super.setOnLongClickListener(onLongClickListener);
+
+        morphController.setOnLongClickListener(onLongClickListener);
+    }
+
     public void setSecondaryGestureListener(GestureDetector.SimpleOnGestureListener gestureListener){
         morphController.setSecondaryGestureListener(gestureListener);
     }

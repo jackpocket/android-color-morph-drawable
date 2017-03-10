@@ -13,6 +13,10 @@ public abstract class Morphable {
     private long animationDurationMs;
     protected long animationStartedAtMs;
 
+    /**
+     * An internal callback used by the ColorMorphDrawable to notify that it has started an animation
+     * with this component. You shouldn't ever need to call this.
+     */
     public Morphable notifyAnimationStart(){
         this.animationStartedAtMs = System.currentTimeMillis();
         return this;
@@ -38,8 +42,19 @@ public abstract class Morphable {
         return this;
     }
 
+    protected float getInterpolation(){
+        float percentCompleted = (System.currentTimeMillis() - animationStartedAtMs) / (float) getAnimationDurationMs();
+
+        return percentCompleted < 1
+                ? interpolator.getInterpolation(percentCompleted)
+                : 1;
+    }
+
     public abstract void draw(Canvas canvas);
 
+    /**
+     * @return the end state color to be used as the background by the ColorMorphDrawable
+     */
     public abstract int getColor();
 
 }
