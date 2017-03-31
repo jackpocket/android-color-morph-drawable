@@ -165,24 +165,27 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
      * Set a View.OnClickListener to be triggered by the GestureDetector's onSingleTapConfirmed() callback.
      * Note: You MUST also set the listener on the View if not using the ColorMorphLayout pattern
      */
-    public void setOnClickListener(View.OnClickListener onClickListener){
+    public ColorMorphController setOnClickListener(View.OnClickListener onClickListener){
         gestureDetector.setOnClickListener(onClickListener);
+        return this;
     }
 
     /**
      * Set a View.OnLongClickListener to be triggered by the GestureDetector's onLongPress() callback.
      * Note: You MUST also set the listener on the View if not using the ColorMorphLayout pattern
      */
-    public void setOnLongClickListener(View.OnLongClickListener onClickListener){
+    public ColorMorphController setOnLongClickListener(View.OnLongClickListener onClickListener){
         gestureDetector.setOnLongClickListener(onClickListener);
+        return this;
     }
 
     /**
      * Set a secondary SimpleOnGestureListener to receive passive events from the attached View.
      * All gestures are handled internally and pass off the events as they occur.
      */
-    public void setSecondaryGestureListener(SimpleOnGestureListener gestureListener){
+    public ColorMorphController setSecondaryGestureListener(SimpleOnGestureListener gestureListener){
         gestureDetector.setSecondaryGestureListener(gestureListener);
+        return this;
     }
 
     public ColorMorphController setTouchEffectsEnabled(boolean touchEffectsEnabled){

@@ -155,7 +155,8 @@ public class ColorMorphDrawable extends Drawable {
 
     @Override
     public void setColorFilter(ColorFilter colorFilter) {
-        throw new RuntimeException("ColorFilter not applicable to RippleMorphColorDrawable");
+//        throw new RuntimeException("ColorFilter not applicable to RippleMorphColorDrawable");
+        // Probably better to just do nothing than crash because of a ColorFilter?.....
     }
 
     @Override
