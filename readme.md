@@ -14,7 +14,7 @@ Easily-extendable color-morphing of a background Drawable.
     }
 
     dependencies {
-        compile('com.jackpocket:color-morph-drawable:1.0.2')
+        compile('com.jackpocket:color-morph-drawable:1.0.3')
     }
 ```
 

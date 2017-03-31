@@ -46,7 +46,7 @@ ext {
     artifact = 'color-morph-drawable'
 
     libraryDescription = 'Easily-extendable color-morphing of a background Drawable.'
-    libraryVersion = '1.0.2'
+    libraryVersion = '1.0.3'
 
     developerId = 'jackpocket'
     developerName = 'Jackpocket'
