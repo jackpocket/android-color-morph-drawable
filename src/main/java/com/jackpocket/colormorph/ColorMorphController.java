@@ -3,6 +3,8 @@ package com.jackpocket.colormorph;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -21,6 +23,10 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
     private boolean touchEffectsEnabled;
     private MorphGestureController gestureDetector;
 
+    private long touchDownMorphStartedAtMs;
+    private long touchUpMorphProtectionDelayMs;
+    private Handler touchUpMorphHandler = new Handler(Looper.getMainLooper());
+
     public ColorMorphController(Context context){
         this(context, null, 0);
     }
@@ -36,6 +42,9 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
 
         this.touchEffectsEnabled = context.getResources()
                 .getBoolean(R.bool.cmd__touch_effects_enabled_by_default);
+
+        this.touchUpMorphProtectionDelayMs = context.getResources()
+                .getInteger(R.integer.cmd__default_touch_up_morph_protection_delay_ms);
 
         int cornerRadius = (int) context.getResources()
                 .getDimension(R.dimen.cmd__default_corner_radius);
@@ -151,14 +160,28 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
 
     @Override
     public void morphOnTouchDown(MotionEvent event){
+        touchUpMorphHandler.removeCallbacksAndMessages(null);
+
+        touchDownMorphStartedAtMs = System.currentTimeMillis();
+
         morphDrawable.morphRippledTo(colorTouched,
                 new int[]{(int) event.getX(), (int) event.getY()});
     }
 
     @Override
-    public void morphOnTouchUp(MotionEvent event){
-        morphDrawable.morphRippledTo(colorNormal,
-                new int[]{(int) event.getX(), (int) event.getY()});
+    public void morphOnTouchUp(final MotionEvent event){
+        long delay = Math.max(0,
+                touchUpMorphProtectionDelayMs - (System.currentTimeMillis() - touchDownMorphStartedAtMs));
+
+        touchUpMorphHandler.postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        morphDrawable.morphRippledTo(colorNormal,
+                                new int[]{ (int) event.getX(), (int) event.getY() });
+                    }
+                },
+                delay);
     }
 
     /**
@@ -190,6 +213,11 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
 
     public ColorMorphController setTouchEffectsEnabled(boolean touchEffectsEnabled){
         this.touchEffectsEnabled = touchEffectsEnabled;
+        return this;
+    }
+
+    public ColorMorphController setTouchUpMorphDelayProtectionDurationMs(long touchUpMorphProtectionDelayMs){
+        this.touchUpMorphProtectionDelayMs = touchUpMorphProtectionDelayMs;
         return this;
     }
 

@@ -119,8 +119,8 @@ public class ColorMorphDrawable extends Drawable {
         canvas.clipPath(clipPath);
         canvas.drawColor(color);
 
-        if(0 < morphers.size()){
-            synchronized(morphers){
+        synchronized(morphers){
+            if(0 < morphers.size()){
                 int deadIndex = -1;
                 int currentIndex = 0;
 

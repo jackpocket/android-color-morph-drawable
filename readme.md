@@ -14,7 +14,7 @@ Easily-extendable color-morphing of a background Drawable.
     }
 
     dependencies {
-        compile('com.jackpocket:color-morph-drawable:1.0.3')
+        compile('com.jackpocket:color-morph-drawable:1.0.4')
     }
 ```
 
@@ -80,6 +80,8 @@ Overriding the default behavior / resources is fairly straightforward:
 <color name="cmd__default_color_touched">#FFCECEC5</color>
 
 <dimen name="cmd__default_corner_radius">0dip</dimen>
+
+<integer name="cmd__default_touch_up_morph_protection_delay_ms">425</integer>
 
 <bool name="cmd__touch_effects_enabled_by_default">true</bool>
 ```

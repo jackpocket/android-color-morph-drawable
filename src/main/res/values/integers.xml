@@ -1,3 +1,5 @@
 <resources>
 
+    <integer name="cmd__default_touch_up_morph_protection_delay_ms">425</integer>
+
 </resources>
