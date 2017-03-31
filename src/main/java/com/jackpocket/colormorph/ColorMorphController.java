@@ -173,12 +173,14 @@ public class ColorMorphController implements MorphGestureController.MorphGesture
         long delay = Math.max(0,
                 touchUpMorphProtectionDelayMs - (System.currentTimeMillis() - touchDownMorphStartedAtMs));
 
+        final int[] coords = new int[]{ (int) event.getX(), (int) event.getY() };
+
         touchUpMorphHandler.postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
                         morphDrawable.morphRippledTo(colorNormal,
-                                new int[]{ (int) event.getX(), (int) event.getY() });
+                                coords);
                     }
                 },
                 delay);
